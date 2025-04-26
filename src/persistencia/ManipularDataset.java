@@ -1,16 +1,12 @@
 package persistencia;
 
 import java.io.*;
-import java.util.*;
-
 import interfaces.ColecaoDeConsumidores;
 import modelos.Consumidor;
 
 public class ManipularDataset {
 
-    public static List<Consumidor> lerDataset(String arquivo) {
-
-        List<Consumidor> consumidores = new ArrayList<>();
+    public static void lerDataset(ColecaoDeConsumidores consumidores, String arquivo) {
 
         try (BufferedReader leitor = new BufferedReader(new FileReader(arquivo))) {
 
@@ -37,7 +33,7 @@ public class ManipularDataset {
                     Consumidor consumidor = new Consumidor(id, anoNascimento, escolaridade, estadoCivil,
                             rendaDomiciliarAnual, gastosVinhos, gastosCarnes, comprasOnline, comprasPresenciais);
 
-                    consumidores.add(consumidor);
+                    consumidores.adicionarConsumidor(consumidor);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
@@ -45,7 +41,6 @@ public class ManipularDataset {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return consumidores;
     }
 
     public static void escreverDataset(String arquivoEscrita, ColecaoDeConsumidores consumidores) {
